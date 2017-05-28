@@ -5,10 +5,11 @@ import cv2
 import numpy as np
 import sys
 
-# construct the argument parser and parse the arguments
-
+#ratio between camera's feild of view and distance from the plane to the camera. In reality this might not be constant, but it certainly won't be the limiting factor in precision.
 
 focal_const = 1.10825
+
+#takes distance from camera as an argument and determines width of feild of view useing the ratio. 
 width = float(sys.argv[1])*1.10825
 
 camera = cv2.VideoCapture(1)
@@ -17,9 +18,9 @@ time.sleep(0.25)
 
 # initialize the first frame in the video stream
 firstFrame = None
+
+
 # loop over the frames of the video
-
-
 car_in_frame = False
 frame_count = 0
 frames_to_pass = []
@@ -30,14 +31,7 @@ while True:
     # grab the current frame and initialize the occupied/unoccupied
     # text
     (grabbed, frame) = camera.read()
-    # if the frame could not be grabbed, then we have reached the end
-    # of the video
-    #if not grabbed:
-     #   break
-
-    # resize the frame, convert it to grayscale, and blur it
-    #frame = imutils.resize(frame, width=500)
-
+    
     if prev_frame is None:
         prev_frame = frame
         continue
