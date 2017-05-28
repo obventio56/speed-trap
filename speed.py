@@ -46,20 +46,20 @@ while True:
     # first frame
     frameDelta = cv2.absdiff(prev_frame, frame)
     frameDeltaAvg = np.average(frameDelta)
-    
-    if car_in_frame and frameDeltaAvg > 1.4:
+
+    if car_in_frame and frameDeltaAvg > 3:
         frame_count = frame_count + 1
-    elif not car_in_frame and frameDeltaAvg > 1.4:
+    elif not car_in_frame and frameDeltaAvg > 3:
         car_in_frame = True
         frame_count = 1
     elif car_in_frame:
-        if frame_count > 10:
+        if frame_count > 5:
             print(frame_count)
             print(width)
             print((frame_count/30.0))
             meters_per_second = width/(frame_count/30.0)
             miles_per_hour = ((meters_per_second*360000)/160934.4)
-            if miles_per_hour > 30:
+            if miles_per_hour > 1:
                 print(str(meters_per_second) + "m/s")
                 print(str(miles_per_hour) + "mph")
                 frames_to_pass.append(frame_count)
